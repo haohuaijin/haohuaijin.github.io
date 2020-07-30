@@ -6,20 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://haohuaijin.github.io">
-  <title>7-11 Saving James Bond - Hard Version (30 分) | HHJ的个人网站</title>
+  <title>Tag: 数学建模 | HHJ的个人网站</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="原题链接：https://pintia.cn/problem-sets/16/problems/673这道题本质是就是一道BFS，只不过要加上路径。&amp;emsp;开始做的时候比较顺利，但是总是有一个测试点没过去，找了半天还是找不到错误。于是google一下，发现是没仔细看题。&amp;emsp;题目中说，当有多条最短路径时，选择第一跳最短的。我竟然么看见(😭😭找了两个多小时)。处理第一条最短，比较简单的">
-<meta name="keywords" content="BFS">
-<meta property="og:type" content="article">
-<meta property="og:title" content="7-11 Saving James Bond - Hard Version (30 分)">
-<meta property="og:url" content="https://haohuaijin.github.io/2019/11/05/7-11 Saving James Bond - Hard Version (30 分)/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="HHJ的个人网站">
+<meta property="og:url" content="https://haohuaijin.github.io/tags/数学建模/index.html">
 <meta property="og:site_name" content="HHJ的个人网站">
-<meta property="og:description" content="原题链接：https://pintia.cn/problem-sets/16/problems/673这道题本质是就是一道BFS，只不过要加上路径。&amp;emsp;开始做的时候比较顺利，但是总是有一个测试点没过去，找了半天还是找不到错误。于是google一下，发现是没仔细看题。&amp;emsp;题目中说，当有多条最短路径时，选择第一跳最短的。我竟然么看见(😭😭找了两个多小时)。处理第一条最短，比较简单的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-05T09:42:06.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="7-11 Saving James Bond - Hard Version (30 分)">
-<meta name="twitter:description" content="原题链接：https://pintia.cn/problem-sets/16/problems/673这道题本质是就是一道BFS，只不过要加上路径。&amp;emsp;开始做的时候比较顺利，但是总是有一个测试点没过去，找了半天还是找不到错误。于是google一下，发现是没仔细看题。&amp;emsp;题目中说，当有多条最短路径时，选择第一跳最短的。我竟然么看见(😭😭找了两个多小时)。处理第一条最短，比较简单的">
+<meta name="twitter:title" content="HHJ的个人网站">
   
     <link rel="alternative" href="/atom.xml" title="HHJ的个人网站" type="application/atom+xml">
   
@@ -142,195 +137,62 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-7-11 Saving James Bond - Hard Version (30 分)" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      7-11 Saving James Bond - Hard Version (30 分)
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2020/07/30/遗传算法学习笔记/" class="archive-article-date">
+  	<time datetime="2020-07-30T01:45:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-30</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/07/30/遗传算法学习笔记/">遗传算法学习笔记</a>
     </h1>
   
 
-        
-        <a href="/2019/11/05/7-11 Saving James Bond - Hard Version (30 分)/" class="archive-article-date">
-  	<time datetime="2019-11-05T09:40:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原题链接：<a href="https://pintia.cn/problem-sets/16/problems/673" target="_blank" rel="noopener">https://pintia.cn/problem-sets/16/problems/673</a><br>这道题本质是就是一道BFS，只不过要加上路径。<br>&emsp;开始做的时候比较顺利，但是总是有一个测试点没过去，找了半天还是找不到错误。于是google一下，发现是没仔细看题。<br>&emsp;题目中说，当有<strong>多条最短路径时，选择第一跳最短的</strong>。我竟然么看见(😭😭找了两个多小时)。处理第一条最短，比较简单的做法时我们在用BFS，一开始把鳄鱼入队时，就把顺序排好，这样出来的一定是最终的结果。</p>
-<h6 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h6><p>在处理能不能在两个鳄鱼之间跳时，一是可以先计算好能不能跳，然后直接在BFS里用结果。二是在BFS的过程中，判断能不能跳。<br>其实我个人比较推荐第二种，没必要先计算好，现算现用就行。不过如果计算的结构要多次使用的话，保存下来了比较好。</p>
-<a id="more"></a>
-
-<h6 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX = <span class="number">110</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INFO = <span class="number">1000000</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> X,Y;</span><br><span class="line">    Node() &#123;&#125; <span class="comment">//用来不初始化定义Ver[101]</span></span><br><span class="line">    Node(<span class="keyword">int</span> _x,<span class="keyword">int</span> _y) : X(_x),Y(_y) &#123;&#125; <span class="comment">//用来提供X和Y的初始值</span></span><br><span class="line">&#125;Ver[MAX];</span><br><span class="line"><span class="keyword">int</span> Path[MAX]; <span class="comment">//记录路径</span></span><br><span class="line"><span class="keyword">int</span> N,D;</span><br><span class="line"><span class="keyword">bool</span> book[MAX]; <span class="comment">//记录是否访问</span></span><br><span class="line"><span class="keyword">int</span> last = <span class="number">-1</span>;</span><br><span class="line"><span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">IsVertexJump</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123; <span class="comment">//能不能从a到b</span></span><br><span class="line">    <span class="keyword">return</span> (<span class="built_in">pow</span>(Ver[a].X-Ver[b].X,<span class="number">2</span>) + <span class="built_in">pow</span>(Ver[a].Y-Ver[b].Y,<span class="number">2</span>) &lt;= <span class="built_in">pow</span>(D,<span class="number">2</span>));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">IsSave</span><span class="params">(<span class="keyword">int</span> a)</span></span>&#123; <span class="comment">//a能不能到岸</span></span><br><span class="line">    <span class="keyword">return</span> (<span class="built_in">pow</span>(Ver[a].X,<span class="number">2</span>) &lt;= <span class="built_in">pow</span>(D,<span class="number">2</span>) || <span class="built_in">pow</span>(Ver[a].Y,<span class="number">2</span>) &lt;= <span class="built_in">pow</span>(D,<span class="number">2</span>) || \</span><br><span class="line">        <span class="built_in">pow</span>(<span class="number">100</span>-Ver[a].X,<span class="number">2</span>) &lt;= <span class="built_in">pow</span>(D,<span class="number">2</span>) || <span class="built_in">pow</span>(<span class="number">100</span>-Ver[a].Y,<span class="number">2</span>) &lt;= <span class="built_in">pow</span>(D,<span class="number">2</span>));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">IsCenterJump</span><span class="params">(<span class="keyword">int</span> a)</span></span>&#123; <span class="comment">//能不能从中心跳出</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">pow</span>(Ver[a].X<span class="number">-50</span>,<span class="number">2</span>) + <span class="built_in">pow</span>(Ver[a].Y<span class="number">-50</span>,<span class="number">2</span>) &lt;= <span class="built_in">pow</span>(D + <span class="number">7.5</span>,<span class="number">2</span>))</span><br><span class="line">        <span class="keyword">return</span> (<span class="built_in">pow</span>(Ver[a].X<span class="number">-50</span>,<span class="number">2</span>) + <span class="built_in">pow</span>(Ver[a].Y<span class="number">-50</span>,<span class="number">2</span>));</span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123; <span class="comment">//排序的比较函数</span></span><br><span class="line">    <span class="keyword">return</span> IsCenterJump(x)&lt;IsCenterJump(y);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Save007</span><span class="params">()</span></span>&#123; <span class="comment">//无权图单源最短路</span></span><br><span class="line">    <span class="keyword">int</span> temp;</span><br><span class="line">    <span class="keyword">int</span> b[MAX]; <span class="comment">//用来把第一跳排序</span></span><br><span class="line">    <span class="built_in">fill</span>(Path, Path+N+<span class="number">1</span>, INFO);</span><br><span class="line">    <span class="built_in">fill</span>(book, book+N+<span class="number">1</span>, <span class="literal">false</span>);</span><br><span class="line">    Path[<span class="number">0</span>] = <span class="number">-1</span>;</span><br><span class="line">    book[<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span>(IsSave(<span class="number">0</span>))&#123;</span><br><span class="line">        last = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)&#123; <span class="comment">//对第一跳排序</span></span><br><span class="line">        b[i] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(b+<span class="number">1</span>,b+N+<span class="number">1</span>,cmp); <span class="comment">//why 第二个是N + 1</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)&#123; <span class="comment">//按靠近center的顺序，放入queue</span></span><br><span class="line">        <span class="keyword">if</span>(IsCenterJump(b[i]))&#123;</span><br><span class="line">            q.push(b[i]);</span><br><span class="line">            Path[b[i]] = <span class="number">0</span>;</span><br><span class="line">            book[b[i]] = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())&#123;</span><br><span class="line">        temp = q.front();</span><br><span class="line">        q.pop();</span><br><span class="line">        <span class="keyword">if</span>(IsSave(temp))&#123; <span class="comment">//能不能到岸</span></span><br><span class="line">            last = temp;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(!book[i] &amp;&amp; IsVertexJump(temp,i))&#123;</span><br><span class="line">                q.push(i);</span><br><span class="line">                Path[i] = temp;</span><br><span class="line">                book[i] = <span class="literal">true</span>; <span class="comment">//在入队时就book</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x,y;</span><br><span class="line">    <span class="keyword">int</span> a[MAX]; <span class="comment">//记录最短路径</span></span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    Ver[<span class="number">0</span>] = Node(<span class="number">50</span>,<span class="number">50</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;N,&amp;D);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;x,&amp;y);</span><br><span class="line">        Ver[i] = Node(x+<span class="number">50</span>,y+<span class="number">50</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    Save007();</span><br><span class="line">    <span class="keyword">if</span>(last == <span class="number">-1</span>) <span class="built_in">printf</span>(<span class="string">"0\n"</span>);<span class="comment">//输出结果</span></span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">while</span>(last &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            a[count++] = last;</span><br><span class="line">            last = Path[last];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,count+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=count<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>,Ver[a[i]].X<span class="number">-50</span>,Ver[a[i]].Y<span class="number">-50</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    system(<span class="string">"pause"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">BFS</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数学建模</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://haohuaijin.github.io/2019/11/05/7-11 Saving James Bond - Hard Version (30 分)/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2020/07/07/计算机网络之运输层/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          计算机网络之运输层
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/11/02/7-10-Saving James-Bond-Easy-Version-25分/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">7-10 Saving James Bond - Easy Version (25分)</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
           </div>
         </div>
       </div>
@@ -353,9 +215,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,

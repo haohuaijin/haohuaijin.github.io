@@ -60,7 +60,7 @@
 			</ul>
 		</nav>
 		<nav>
-			总文章数 10
+			总文章数 11
 		</nav>
 		<nav class="header-smart-menu">
     		
@@ -138,6 +138,116 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-遗传算法学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/30/遗传算法学习笔记/">遗传算法学习笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/30/遗传算法学习笔记/" class="archive-article-date">
+  	<time datetime="2020-07-30T01:45:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<p>遗传算法是一种启发式的优化算法，具有很大的灵活性。之所以较遗传算法，这要是因为算法的过程模拟了自然选择。遗传算法的应用领域非常的广，适用于复杂的问题，同时还具有很大的灵活性，可以自主设计很多算子。</p>
+<p>下面介绍遗传算法的主要流程：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">初始化种群</span><br><span class="line">计算种群的适应度和累积概率</span><br><span class="line">while iter &lt; itermax:</span><br><span class="line">	复制 % 剔除适应度低的，将适应度好的复制一份</span><br><span class="line">	交叉 % 二进制数字位数交换</span><br><span class="line">	变异 % 二进制位数取否</span><br><span class="line">	重新计算适应度和累积概率</span><br><span class="line">	end</span><br><span class="line">解码输出结果</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-编码"><a href="#1-编码" class="headerlink" title="1. 编码"></a>1. 编码</h2><p>编码的主要方式有<strong>二进制码，实数码和格雷码</strong>。一般用二进制来编码。在这一阶段是将一个变量或多个变量，根据其约束的定义域以及我们要得到的自变量的精度，选择合适的二进制位数将问题编码。例如变量$x$的区间是$(L,U)$，要求的精度是小数点后四位，也就意味着每个变量应该被分成至少$(L,U)\times 10^4$个部分，对一个变量的二进制数串位数用以下公式计算：<br>$$<br>2^{m_j-1} &lt; (U-L)\times 10^4 \le 2^{m_j}-1<br>$$<br>如果是多个变量的话，可以将他们各自编码后，连在一起。</p>
+<p>解码的话使用下面的公式：<br>$$<br>x = L + \left( \sum_{i=1}^{k}b_i2^{i-1}\right)\cfrac{U-L}{2^k-1}<br>$$</p>
+<h2 id="2-评价个体的适应度"><a href="#2-评价个体的适应度" class="headerlink" title="2. 评价个体的适应度"></a>2. 评价个体的适应度</h2><p>这里的适应度函数对应于自然选择，我们需要根据自己的实际问题来设定适应度函数，适应度函数的目的是，将种群中好的和差的区分开来。例如在求函数最大值的时候，适应度函数就是函数本身。下面是步骤：</p>
+<ol>
+<li>计算染色体$U_k$的适应度值</li>
+</ol>
+<p>$$<br>eval(U_k) = f(x^k),\quad k = 1,2,···<br>$$</p>
+<ol start="2">
+<li>计算种群的适应度总和</li>
+</ol>
+<p>$$<br>F = \sum_{k=1}^{n}eval(U_k)<br>$$</p>
+<ol start="3">
+<li>计算每个染色体被复制的概率</li>
+</ol>
+<p>$$<br>P_k = \cfrac{eval(U_k)}{F}<br>$$</p>
+<ol start="4">
+<li>计算每个染色体被复制的累积概率</li>
+</ol>
+<p>$$<br>Q_k = \sum_{j-1}^kP_k<br>$$</p>
+<h2 id="3-新种群复制"><a href="#3-新种群复制" class="headerlink" title="3. 新种群复制"></a>3. 新种群复制</h2><p>可以有好几种方法，常见的是根据前面计算的累积概率$Q_k$，利用计算机随机生成<code>0-1</code>的随机数，看看随机数落到那个区间里面，取区间右边那个累积概率对应的$k$值，复制个体。</p>
+<p>举个例子现在有四个个体他们的累积概率是<code>0.2</code>，<code>0.3</code>，<code>0.5</code>，<code>1.0</code>。假设现在生成了个随机数为<code>0.4</code>，他现在是落在了<code>0.3-0.5</code>的区间里，所以我们将右侧的<code>0.5</code>复制一遍。</p>
+<h2 id="4-种群的交配和变异"><a href="#4-种群的交配和变异" class="headerlink" title="4. 种群的交配和变异"></a>4. 种群的交配和变异</h2><p>和染色体的交换类似，<strong>交配</strong>就是在两个二进制数中选取一位，然后将他们后面的所有为进行交换。</p>
+<p><strong>变异</strong>是将二进制数，其中的一位取否。</p>
+<h2 id="5-最后"><a href="#5-最后" class="headerlink" title="5. 最后"></a>5. 最后</h2><p>将上面的过程不断的重复，直到最大的迭代次数或者种群不在进化。</p>
+<p>在遗传算法中，我认为比较重要的几个方面是，</p>
+<ul>
+<li><strong>适应度函数的确定</strong>，面对实际问题时我们要设计适应度函数往往与实验相结合(假死酵母菌)。同时在遗传算法不同的阶段使用不同的适应度函数，回去的不同的效果。</li>
+<li><strong>各种算子的设计</strong>，在我们进行遗传算法的过程中，现在已经有的算子有复制，交叉，变异等等，算子应该满足的条件是<strong>稳定，可变</strong>。我们可以根据不同的问题设计不同的算子。</li>
+</ul>
+<h2 id="6-应用"><a href="#6-应用" class="headerlink" title="6. 应用"></a>6. 应用</h2><ul>
+<li>假丝酵母菌求解最优的浓度。</li>
+<li>我的想法是将遗传算法，用来求解神经网络的参数。</li>
+<li>各种复杂的，非线性的优化问题。</li>
+</ul>
+<h2 id="7-代码"><a href="#7-代码" class="headerlink" title="7. 代码"></a>7. 代码</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%主程序：用遗传算法求解y=200*exp(-0.05*x).*sin(x)在[-2 2]区间上的最大值</span></span><br><span class="line">clc;</span><br><span class="line">clear all;</span><br><span class="line">close all;</span><br><span class="line"><span class="keyword">global</span> BitLength</span><br><span class="line"><span class="keyword">global</span> boundsbegin</span><br><span class="line"><span class="keyword">global</span> boundsend</span><br><span class="line">bounds=[<span class="number">-2</span> <span class="number">2</span>];<span class="comment">%一维自变量的取值范围</span></span><br><span class="line">precision=<span class="number">0.0001</span>; <span class="comment">%运算精度</span></span><br><span class="line">boundsbegin=bounds(:,<span class="number">1</span>);</span><br><span class="line">boundsend=bounds(:,<span class="number">2</span>);</span><br><span class="line"><span class="comment">%计算如果满足求解精度至少需要多长的染色体</span></span><br><span class="line">BitLength=<span class="built_in">ceil</span>(<span class="built_in">log2</span>((boundsend-boundsbegin)' ./ precision));</span><br><span class="line">popsize=<span class="number">50</span>; <span class="comment">%初始种群大小</span></span><br><span class="line">Generationnmax=<span class="number">12</span>;  <span class="comment">%最大代数</span></span><br><span class="line">pcrossover=<span class="number">0.90</span>; <span class="comment">%交配概率</span></span><br><span class="line">pmutation=<span class="number">0.09</span>; <span class="comment">%变异概率</span></span><br><span class="line"><span class="comment">%产生初始种群</span></span><br><span class="line">population=<span class="built_in">round</span>(<span class="built_in">rand</span>(popsize,BitLength));</span><br><span class="line"><span class="comment">%计算适应度,返回适应度Fitvalue和累积概率cumsump</span></span><br><span class="line">[Fitvalue,cumsump]=fitnessfun(population);  </span><br><span class="line">Generation=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span> Generation&lt;Generationnmax+<span class="number">1</span></span><br><span class="line">   <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:<span class="number">2</span>:popsize </span><br><span class="line">      <span class="comment">%选择操作</span></span><br><span class="line">      seln=selection(population,cumsump);</span><br><span class="line">      <span class="comment">%交叉操作</span></span><br><span class="line">      scro=crossover(population,seln,pcrossover);</span><br><span class="line">      scnew(<span class="built_in">j</span>,:)=scro(<span class="number">1</span>,:);</span><br><span class="line">      scnew(<span class="built_in">j</span>+<span class="number">1</span>,:)=scro(<span class="number">2</span>,:);</span><br><span class="line">      <span class="comment">%变异操作</span></span><br><span class="line">      smnew(<span class="built_in">j</span>,:)=mutation(scnew(<span class="built_in">j</span>,:),pmutation);</span><br><span class="line">      smnew(<span class="built_in">j</span>+<span class="number">1</span>,:)=mutation(scnew(<span class="built_in">j</span>+<span class="number">1</span>,:),pmutation);</span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line">   population=smnew;  <span class="comment">%产生了新的种群</span></span><br><span class="line">   <span class="comment">%计算新种群的适应度   </span></span><br><span class="line">   [Fitvalue,cumsump]=fitnessfun(population);</span><br><span class="line">   <span class="comment">%记录当前代最好的适应度和平均适应度</span></span><br><span class="line">   [fmax,nmax]=<span class="built_in">max</span>(Fitvalue);</span><br><span class="line">   fmean=<span class="built_in">mean</span>(Fitvalue);</span><br><span class="line">   ymax(Generation)=fmax;</span><br><span class="line">   ymean(Generation)=fmean;</span><br><span class="line">   <span class="comment">%记录当前代的最佳染色体个体</span></span><br><span class="line">   x=transform2to10(population(nmax,:));</span><br><span class="line">   <span class="comment">%自变量取值范围是[-2 2],需要把经过遗传运算的最佳染色体整合到[-2 2]区间</span></span><br><span class="line">   xx=boundsbegin+x*(boundsend-boundsbegin)/(power((boundsend),BitLength)<span class="number">-1</span>);</span><br><span class="line">   xmax(Generation)=xx;</span><br><span class="line">   Generation=Generation+<span class="number">1</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">Generation=Generation<span class="number">-1</span>;</span><br><span class="line">Bestpopulation=xx</span><br><span class="line">Besttargetfunvalue=targetfun(xx)</span><br><span class="line"></span><br><span class="line"><span class="comment">%绘制经过遗传运算后的适应度曲线。一般地，如果进化过程中种群的平均适应度与最大适</span></span><br><span class="line"><span class="comment">%应度在曲线上有相互趋同的形态，表示算法收敛进行得很顺利，没有出现震荡；在这种前</span></span><br><span class="line"><span class="comment">%提下，最大适应度个体连续若干代都没有发生进化表明种群已经成熟。</span></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>);</span><br><span class="line">hand1=<span class="built_in">plot</span>(<span class="number">1</span>:Generation,ymax);</span><br><span class="line">set(hand1,<span class="string">'linestyle'</span>,<span class="string">'-'</span>,<span class="string">'linewidth'</span>,<span class="number">1.8</span>,<span class="string">'marker'</span>,<span class="string">'*'</span>,<span class="string">'markersize'</span>,<span class="number">6</span>)</span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line">hand2=<span class="built_in">plot</span>(<span class="number">1</span>:Generation,ymean);</span><br><span class="line">set(hand2,<span class="string">'color'</span>,<span class="string">'r'</span>,<span class="string">'linestyle'</span>,<span class="string">'-'</span>,<span class="string">'linewidth'</span>,<span class="number">1.8</span>,...</span><br><span class="line"><span class="string">'marker'</span>,<span class="string">'h'</span>,<span class="string">'markersize'</span>,<span class="number">6</span>)</span><br><span class="line">xlabel(<span class="string">'进化代数'</span>);ylabel(<span class="string">'最大/平均适应度'</span>);xlim([<span class="number">1</span> Generationnmax]);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">'最大适应度'</span>,<span class="string">'平均适应度'</span>);</span><br><span class="line">box off;<span class="built_in">hold</span> off;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数学建模</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-计算机网络之运输层" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -852,84 +962,10 @@
 
 
   
-    <article id="post-7-4 List Leaves (25 分)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/03/7-4 List Leaves (25 分)/">7-4 List Leaves(25分)</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/03/7-4 List Leaves (25 分)/" class="archive-article-date">
-  	<time datetime="2019-10-03T08:58:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这道题在逻辑上并不难，难在我们可能树不是很熟悉上。<br>我用了<strong>静态链表</strong>的方法构造树，用<strong>循环队列</strong>来用数组实现队列。</p>
-<p><strong>思路：</strong><br>1、将数据读进来用，找到<strong>根节点</strong>。<br>2、<strong>递归</strong>找到所有的<strong>叶子节点</strong>。<br>3、用<strong>队列实现层次遍历</strong>，来找到树各层的元素。<br>4、比较<strong>叶子节点</strong>和<strong>层次遍历的结果</strong>得到最终的结果。</p>
-<h5 id="AC代码"><a href="#AC代码" class="headerlink" title="AC代码:"></a>AC代码:</h5>
-        
-          <a class="article-more-a" href="/2019/10/03/7-4 List Leaves (25 分)/#more">展开全文 >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PTA</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 
 
@@ -1054,6 +1090,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数学建模</a>
               </li>
             
             <div class="clearfix"></div>
