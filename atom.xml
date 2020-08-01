@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://haohuaijin.github.io/"/>
-  <updated>2020-08-01T01:03:05.908Z</updated>
+  <updated>2020-08-01T01:17:44.620Z</updated>
   <id>https://haohuaijin.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://haohuaijin.github.io/2020/08/01/matlab-for-mac-%E6%89%93%E5%BC%80cftool%E5%8D%A1%E6%AD%BB%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
     <id>https://haohuaijin.github.io/2020/08/01/matlab-for-mac-%E6%89%93%E5%BC%80cftool%E5%8D%A1%E6%AD%BB%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</id>
     <published>2020-08-01T00:53:57.000Z</published>
-    <updated>2020-08-01T01:03:05.908Z</updated>
+    <updated>2020-08-01T01:17:44.620Z</updated>
     
     <content type="html"><![CDATA[<p>在mac上安装完matlab后，想试一试cftool的打开速度，结果一打开cftool就卡死了，然后去网上找了许多的资料，多没有想到相关的信息。</p><p>最后在matlab中文论坛发现有人在用matlab仿真时死机，解决方案是<strong>magnet对matlab仅用</strong>。于是我就试了试，成功解决问题。</p><p>如果你也有类似的问题，不妨试一试把Magnet对matlab禁用。</p><p>原地址：<a href="https://www.ilovematlab.cn/thread-579451-1-1.html" target="_blank" rel="noopener">https://www.ilovematlab.cn/thread-579451-1-1.html</a></p>]]></content>
     
@@ -37,7 +37,7 @@
     
     
     
-      <category term="-bugs" scheme="https://haohuaijin.github.io/tags/bugs/"/>
+      <category term="bugs" scheme="https://haohuaijin.github.io/tags/bugs/"/>
     
   </entry>
   
