@@ -1,5 +1,5 @@
+https://haohuaijin.github.io/2020/08/01/matlab-for-mac-打开cftool卡死解决方案/
 https://haohuaijin.github.io/2020/07/30/遗传算法学习笔记/
 https://haohuaijin.github.io/2020/07/07/计算机网络之运输层/
 https://haohuaijin.github.io/2019/11/05/7-11 Saving James Bond - Hard Version (30 分)/
 https://haohuaijin.github.io/2019/11/02/7-10-Saving James-Bond-Easy-Version-25分/
-https://haohuaijin.github.io/2019/10/26/7-6-列出连通集-25分/
