@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://haohuaijin.github.io/"/>
-  <updated>2020-08-01T01:17:44.620Z</updated>
+  <updated>2020-08-08T14:47:29.597Z</updated>
   <id>https://haohuaijin.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>macos vim 进入可视块模式</title>
+    <link href="https://haohuaijin.github.io/2020/08/08/macos-vim-%E8%BF%9B%E5%85%A5%E5%8F%AF%E8%A7%86%E5%9D%97%E6%A8%A1%E5%BC%8F/"/>
+    <id>https://haohuaijin.github.io/2020/08/08/macos-vim-%E8%BF%9B%E5%85%A5%E5%8F%AF%E8%A7%86%E5%9D%97%E6%A8%A1%E5%BC%8F/</id>
+    <published>2020-08-08T14:43:16.000Z</published>
+    <updated>2020-08-08T14:47:29.597Z</updated>
+    
+    <content type="html"><![CDATA[<p>在windows的vim上进入vim的块模式是<code>&lt;ctrl&gt;-v</code>，不过在mac上的键盘和windows上不一样，google了半天也没找到。最后是路痴发现使用<code>&lt;control&gt;-v</code>就可以进入vim的块模式(列选择)。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在windows的vim上进入vim的块模式是&lt;code&gt;&amp;lt;ctrl&amp;gt;-v&lt;/code&gt;，不过在mac上的键盘和windows上不一样，google了半天也没找到。最后是路痴发现使用&lt;code&gt;&amp;lt;control&amp;gt;-v&lt;/code&gt;就可以进入vim的块
+      
+    
+    </summary>
+    
+    
+    
+      <category term="vim" scheme="https://haohuaijin.github.io/tags/vim/"/>
+    
+  </entry>
   
   <entry>
     <title>matlab for mac 打开cftool卡死解决方案</title>
