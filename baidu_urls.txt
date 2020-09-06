@@ -1,5 +1,5 @@
+https://haohuaijin.github.io/2020/09/06/华为云ubuntu配置nginx踩坑记录/
 https://haohuaijin.github.io/2020/08/08/macos-vim-进入可视块模式/
 https://haohuaijin.github.io/2020/08/01/matlab-for-mac-打开cftool卡死解决方案/
 https://haohuaijin.github.io/2020/07/30/遗传算法学习笔记/
 https://haohuaijin.github.io/2020/07/07/计算机网络之运输层/
-https://haohuaijin.github.io/2019/11/05/7-11 Saving James Bond - Hard Version (30 分)/

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://haohuaijin.github.io/"/>
-  <updated>2020-08-08T14:55:03.515Z</updated>
+  <updated>2020-09-06T01:29:11.830Z</updated>
   <id>https://haohuaijin.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>华为云ubuntu配置nginx踩坑记录</title>
+    <link href="https://haohuaijin.github.io/2020/09/06/%E5%8D%8E%E4%B8%BA%E4%BA%91ubuntu%E9%85%8D%E7%BD%AEnginx%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/"/>
+    <id>https://haohuaijin.github.io/2020/09/06/%E5%8D%8E%E4%B8%BA%E4%BA%91ubuntu%E9%85%8D%E7%BD%AEnginx%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/</id>
+    <published>2020-09-06T00:46:41.000Z</published>
+    <updated>2020-09-06T01:29:11.830Z</updated>
+    
+    <content type="html"><![CDATA[<p>服务器：华为云<br>操作系统： ubuntu 18.04<br>今天在华为云上配置nginx发现怎么也配置不成功，<strong>不能在浏览器上访问，同时也ping不通，不过在云服务器上的nginx是成功运行的。</strong></p><p>最后终于找到了解决办法，更改华为云的安全组配置，配置80端口，同时将它设置下面的内容，如图</p><center class="third">    <img src="https://gitee.com/Hao-132/figure/raw/master/img/华为云.png" width="700"></center>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;服务器：华为云&lt;br&gt;操作系统： ubuntu 18.04&lt;br&gt;今天在华为云上配置nginx发现怎么也配置不成功，&lt;strong&gt;不能在浏览器上访问，同时也ping不通，不过在云服务器上的nginx是成功运行的。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;最后终于找到了解决办法，更
+      
+    
+    </summary>
+    
+    
+    
+      <category term="踩坑" scheme="https://haohuaijin.github.io/tags/%E8%B8%A9%E5%9D%91/"/>
+    
+  </entry>
   
   <entry>
     <title>macos vim 进入可视块模式</title>
@@ -93,7 +118,7 @@
     <link href="https://haohuaijin.github.io/2020/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E8%BF%90%E8%BE%93%E5%B1%82/"/>
     <id>https://haohuaijin.github.io/2020/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E8%BF%90%E8%BE%93%E5%B1%82/</id>
     <published>2020-07-07T03:23:49.000Z</published>
-    <updated>2020-07-07T07:21:06.000Z</updated>
+    <updated>2020-09-06T01:28:34.294Z</updated>
     
     <content type="html"><![CDATA[<p>这里主要讲的是在运输层几个比较重要的技术，即多路分解和复用，可靠数据传输原理和拥塞原理。</p><h2 id="1-多路复用-分解"><a href="#1-多路复用-分解" class="headerlink" title="1. 多路复用/分解"></a>1. 多路复用/分解</h2><p>先给出官方定义，将主机间交付扩展到进程间交付被称为<strong>运输层的多路复用和分解</strong>。<strong>多路分解</strong>就是在运输层接收到来自网络层数据后，根据运输层报文特殊字段的信息，将运输层报文段的数据交付到正确的套接字中。<strong>多路复用</strong>就是在运输层接受到<strong>套接字</strong>数据后，根据套接字的不同，生成<strong>运输层报文特殊字段</strong>(用于分解)，然后将报文发送到网络层。通俗来说，多路复用和分解可以让<strong>不同进程的报文</strong>来使用<strong>相同的运输层协议</strong>(TCP，UDP)运输报文。</p><center class="third">    <img src="https://gitee.com/Hao-132/blogimage/raw/master/img/多路复用分解.png" width="600"></center><p>如图，运输层通过多路复用和分解，实现数据的正确交付。</p><p>下面这句话引用自计算机网络自顶向下方法，可以加深我们的理解：</p><blockquote><p>尽管我们在因特网运输层协议的环境下引入了多路复用和多路分解，认识到下列事实是重要的：</p><p>他们与在某层(在运输层或别处)的单一协议何时被位于接下来的较高层的多个协议使用有关。</p></blockquote><h5 id="那么如何实现多路复用和分解呢？"><a href="#那么如何实现多路复用和分解呢？" class="headerlink" title="那么如何实现多路复用和分解呢？"></a>那么如何实现多路复用和分解呢？</h5><a id="more"></a><p>需要两个条件：</p><ol><li>每个套接字有唯一的<strong>标识符</strong>(也就是<strong>端口号</strong>)</li><li>也就是前面讲的，运输层报文的特殊字段(<strong>包含源端口号和目的端口号</strong>)</li></ol><p>根据运输层协议的不同，UDP和TCP的报文中的特殊字段不同。</p><p><strong>补充：</strong></p><ol><li><strong>套接字接口</strong>的作用，把来自进程的数据传输到运输层，并且把来自运输层的数据传送的特定的进程。</li><li>每一个套接字分配一个<strong>端口号</strong>用来作为套接字的标识符。</li><li>运输层报文的格式基本如下所示：</li></ol><center class="third">    <img src="https://gitee.com/Hao-132/blogimage/raw/master/img/运输层报文格式.png" width="350"></center><p>下面具体讲一下UDP和TCP的多路复用和分解。</p><h3 id="1-1-UDP的多路复用-分解"><a href="#1-1-UDP的多路复用-分解" class="headerlink" title="1.1 UDP的多路复用/分解"></a>1.1 UDP的多路复用/分解</h3><p>在UDP中一个套接字是由一个二元组全面标识的，二元组中包含了一个<strong>目的IP地址和目的端口号</strong>。</p><p>举个例子：假设现在有A，B，C三个主机，A和B同时通过2333端口号与C主机的3333端口号通信，这是A和B的目的端口号都是3333，所以他们<strong>通过相同的套接字进入相同的进程</strong>。这里的源端口号是用来从C向A，B发送报文时使用的。</p><h3 id="1-2-TCP的多路复用-分解"><a href="#1-2-TCP的多路复用-分解" class="headerlink" title="1.2 TCP的多路复用/分解"></a>1.2 TCP的多路复用/分解</h3><p>TCP中的一个套接字是有四元组标识的，即<strong>目的IP地址，目的端口号，源IP地址和源端口号</strong>。</p><center class="third">    <img src="https://gitee.com/Hao-132/blogimage/raw/master/img/TCP多路复用.png" width="700"></center><p>如图很好展示了TCP如何来识别套接字。</p><h2 id="2-可靠数据传输原理"><a href="#2-可靠数据传输原理" class="headerlink" title="2. 可靠数据传输原理"></a>2. 可靠数据传输原理</h2><p>首先要明确，我们真实的网络环境会发生<strong>比特差错</strong>和<strong>丢包的</strong>。</p><p>可靠数据传输主要包含以下几个技术，差错检验，肯定确认(ACK)，序号，定时器，回退N步，累计确认，选择确认等等。</p><p><strong>注意：</strong> 我这里讲的是，可靠数据传输用到的一些技术方法，并没有具体TCP或UDP报文。</p><p>下面分别介绍上面的技术:</p><h3 id="2-1-差错检验"><a href="#2-1-差错检验" class="headerlink" title="2.1 差错检验"></a>2.1 差错检验</h3><p>差错检验用来检测报文在传输的过程中有没有发生错误，具体的方法还没学到。</p><h3 id="2-2-肯定确认ACK-positive-Acknowledgment-和否定确认-NAK"><a href="#2-2-肯定确认ACK-positive-Acknowledgment-和否定确认-NAK" class="headerlink" title="2.2 肯定确认ACK(positive Acknowledgment)和否定确认(NAK)"></a>2.2 肯定确认ACK(positive Acknowledgment)和否定确认(NAK)</h3><p>简单地说，就是接受端每当收到一个<strong>正确报文</strong>，就发送一个<strong>ACK</strong>来告诉发送端他收到了。而如果报文在运输的过程中出现了错误(比如差错检验没通过)，这时接收端就会<strong>丢弃刚刚收到的报文</strong>，并且发送一个<strong>NAK</strong>来告诉发送端重新发送上一个报文。</p><p><strong>注意:</strong>  由于我们真实的网络环境是会发生<strong>比特差错的</strong>，所以ACK和NAK也会发生错误。举个例子，现在 接收端正确收到了报文A，并且发送了一个ACK，不过由于传输中发生了错误，<strong>ACK变成了NAK</strong>。这时接受端收到了错误的ACK，由于不确定，发送端会重新发送上一个报文，但是这时接受端<strong>已经正确接受到了报文</strong>，所以接受端再次接受的正确的报文A时，接受端就发生了冗余(他自己没办法判断是不是冗余)。解决这个问题这个问题的方法就是接下来要讲的序号。</p><h3 id="2-3-序号"><a href="#2-3-序号" class="headerlink" title="2.3 序号"></a>2.3 序号</h3><p>序号就是给每一个发送报文附上一个<strong>递增的序号</strong>，同时返回的ACK上也包含这个序号，表示此序号的确认。通过序号就可以完美的解决2.2出现的问题，<strong>根据序号的不同</strong>接受端就可以准确的判断报文是不是相同。</p><p>在TCP中，初始序号是由计算随机计生成，而返回的ACK的序号是<strong>报文的编号</strong>加上<strong>报文数据部分的字节数</strong>。分送端第二次发送的报文的编号，则是由上一次的ACK指定。</p><p>其实，我们现在可以只用ACK来确认，在接受端收到<strong>受损报文</strong>后，发送上一个报文ACK，当接收端再一次收到ACK时(<strong>冗余ACK，对一个报文的ACK接收端到多次ACK</strong>)，他就知到报文受损了，所以他重新发送报文。下面只使用ACK。</p><h3 id="2-4-定时器"><a href="#2-4-定时器" class="headerlink" title="2.4 定时器"></a>2.4 定时器</h3><p>定时器的设定是因为在真实的网络环境中，会出现<strong>丢包</strong>的情况。</p><p>举个例子，假设现在发送端向接受端发送了一个报文A，考虑一下两种情况：</p><ol><li>报文A，在发送的途中丢失了</li><li>接受端收到了报文了，但是返回的ACK丢失了</li></ol><p>以上的情况都会导致发送端收不到ACK，于是我们可以设定一个<strong>定时器</strong>和一个<strong>超时间隔</strong>，当发送方在指定的超时间隔内没有收到ACK后，发送端就<strong>重新发送报文A</strong>。</p><h3 id="2-5-流水线技术"><a href="#2-5-流水线技术" class="headerlink" title="2.5 流水线技术"></a>2.5 流水线技术</h3><p>到现在为止，我们讨论的运输都是发送一个数据，返回一个ACK，然后在发送一个数据，这样的方式叫做<strong>停等协议</strong>。但是如果数据运输的时间比较长的话，停等协议的信道利用率是非常低的。所以引入了<strong>流水线协议</strong>，即一次可以发送多个报文。如图a是停等协议，图b是流水线协议。</p><center class="third">    <img src="https://gitee.com/Hao-132/blogimage/raw/master/img/流水线1.png" width="350"></center><center class="third">    <img src="https://gitee.com/Hao-132/blogimage/raw/master/img/流水线2.png" width="350"></center><p>使用流水线协议会带来以下的影响(参考Top-Down，这里的逻辑我没怎么理清)：</p><ol><li><strong>必须增加序号的范围</strong>，因为每个输送中的的分组(不计算重传的)必须有一个唯一的序号，而且有多个在输送中的未确认报文。</li><li><strong>协议的发送方和接收方两端也许不得不缓存多个分组</strong>。发送方最低限应当能缓冲哪些已发送但未确认的分组，如下面们讨论的那样，接收方或许也需要缓存那些以正确接受的分组。</li><li>所需序号范围和对缓冲的要求取决于数据传输协议如何处理丢失，损坏及延时过大的分组。解决流水线的差错恢复有两种基本方法是：<strong>回退N步</strong>(Go-Back-N，GBN)和<strong>选择重传</strong>(Selective Repeat，SR)。</li></ol><h3 id="2-6-回退N步"><a href="#2-6-回退N步" class="headerlink" title="2.6 回退N步"></a>2.6 回退N步</h3><p>流水线技术，可以使我们不用等待<strong>上一个发送报文ACK</strong>，就可以发送新的报文。但是我们不能无限制的发送新报文，所以规定了一个数字N(也叫窗口长度，把N个报文称为<strong>窗口</strong>)，作为最大的<strong>已发送还未确认报文</strong>的数目。如图</p><center class="third">    <img src="https://gitee.com/Hao-132/blogimage/raw/master/img/回退N步.png" width="800"></center><p><strong>发送端的功能：</strong></p><ol><li>接受上层的调用</li><li>发送数据时，<strong>已发送还未确认的报文</strong>最多不超过N。只有当现在的报文被确认后才能发送新的报文(在图上的表现就是，把窗口右移)。</li><li><strong>超时后</strong>，把现在窗口中所有的报文所有的<strong>已经发送还未确认的报文</strong>重新发送一遍。</li></ol><p><strong>接收端的功能：</strong></p><ol><li>接收到的报文序号正确时，发送一个ACK。</li><li>接收到的报文序号不正确时，不发送ACK。</li><li>采取<strong>累计确认</strong>的方法，即ACK是对他以及他之前所有报文的确认。</li></ol><p>如图下面的窗口的大小为4，当出现超时后，发送端重新发送所有的报文。</p><center class="third">    <img src="https://gitee.com/Hao-132/blogimage/raw/master/img/回退N步演示.png" width="500"></center><h3 id="2-7-选择重传"><a href="#2-7-选择重传" class="headerlink" title="2.7 选择重传"></a>2.7 选择重传</h3><p>GBN可以提高信道的利用率，但是它也会到来一些问题。当窗口的长度N比较大的时候，前面报文的丢失会导致后面所有报文的重传，这样显然效率不高。于是有了选择重传。</p><p>选择重传就是接受端将那些失序到达的报文，接受并且发送一个ACK。所以他采取的不是累计确认，而是一个ACK确认一个报文。在发送端只有接收到每一个发送报文的ACK，才确切的知道报文已经发送。下面描述发送端，和接收端的功能。</p><p><strong>发送端：</strong></p><ol><li>接受上层的调用</li><li>发送端维护一个大小N的窗口(<strong>从第一个发送未确认报文开始，大小为N</strong>)，第一个报文接受的ACK是窗口右移。</li><li>超时时，发送端重新发送窗口N中，那些<strong>发送但未确认的报文</strong>。</li></ol><p><strong>接收端：</strong></p><ol><li>只要有报文到达，就发送ACK。</li></ol><p>如图展示了选择重传协议的作用：</p><center class="third">    <img src="https://gitee.com/Hao-132/blogimage/raw/master/img/选择重传.png" width="600"></center><h2 id="3-拥塞控制原理"><a href="#3-拥塞控制原理" class="headerlink" title="3. 拥塞控制原理"></a>3. 拥塞控制原理</h2><p>拥塞控制主要有两种方法：</p><ol><li><strong>端到端的拥塞控制</strong>，在运输层实现，TCP的拥塞控制。</li><li><strong>网络辅助的拥塞控制</strong>，路由器向发送方提供关于网络的拥塞情况。</li></ol>]]></content>
     
