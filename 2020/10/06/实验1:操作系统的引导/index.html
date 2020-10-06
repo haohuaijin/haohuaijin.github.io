@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="HHJ的个人网站">
 <meta property="og:description" content="实验的准备工作操作 解压源码用tar -zxvf hit-oslab-linux-20110823.tar.gz 可以使用-C来指定解压路径，tar -zxvf hit-oslab-linux-20110823.tar.gz -C [path] 编译linux-0.11的源码，在linux-0.11的文件夹下运行make all或者make。 在oslab文件目录下运行./run运行bochs 中">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-06T08:33:31.167Z">
+<meta property="og:updated_time" content="2020-10-06T08:43:04.821Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="实验1:操作系统的引导">
 <meta name="twitter:description" content="实验的准备工作操作 解压源码用tar -zxvf hit-oslab-linux-20110823.tar.gz 可以使用-C来指定解压路径，tar -zxvf hit-oslab-linux-20110823.tar.gz -C [path] 编译linux-0.11的源码，在linux-0.11的文件夹下运行make all或者make。 在oslab文件目录下运行./run运行bochs 中">
@@ -171,10 +171,10 @@
 <h2 id="实验内容"><a href="#实验内容" class="headerlink" title="实验内容"></a>实验内容</h2><ol>
 <li>阅读《Linux 内核完全注释》的第 6 章，对计算机和 Linux 0.11 的引导过程进行初步的了解；</li>
 <li>按照下面的要求改写 0.11 的引导程序 bootsect.s</li>
-<li>有兴趣同学可以做做进入保护模式前的设置程序 setup.s。<a id="more"></a>
-<h3 id="改写-bootsect-s-主要完成如下功能："><a href="#改写-bootsect-s-主要完成如下功能：" class="headerlink" title="改写 bootsect.s 主要完成如下功能："></a>改写 bootsect.s 主要完成如下功能：</h3></li>
+<li>有兴趣同学可以做做进入保护模式前的设置程序 setup.s。</li>
 </ol>
-<ul>
+<a id="more"></a>
+<h3 id="改写-bootsect-s-主要完成如下功能："><a href="#改写-bootsect-s-主要完成如下功能：" class="headerlink" title="改写 bootsect.s 主要完成如下功能："></a>改写 bootsect.s 主要完成如下功能：</h3><ul>
 <li>bootsect.s 能在屏幕上打印一段提示信息“XXX is booting…”，其中 XXX 是你给自己的操作系统起的名字，也可以显示一个特色 logo，以表示自己操作系统的与众不同。</li>
 </ul>
 <h3 id="改写-setup-s-主要完成如下功能："><a href="#改写-setup-s-主要完成如下功能：" class="headerlink" title="改写 setup.s 主要完成如下功能："></a>改写 setup.s 主要完成如下功能：</h3><ol>
@@ -504,11 +504,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color4">DFS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">链表</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -516,7 +516,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DFS</a>
+                <a href="javascript:void(0)" class="js-tag color3">链表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -524,11 +524,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">队列</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">队列</a>
+                <a href="javascript:void(0)" class="js-tag color4">vim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">bugs</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -540,27 +548,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">bugs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">踩坑</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vim</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+                <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数学建模</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
             
             <div class="clearfix"></div>
