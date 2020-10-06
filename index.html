@@ -60,7 +60,7 @@
 			</ul>
 		</nav>
 		<nav>
-			总文章数 14
+			总文章数 15
 		</nav>
 		<nav class="header-smart-menu">
     		
@@ -138,6 +138,148 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-实验2:系统调用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/06/实验2:系统调用/">实验2:系统调用</a>
+    </h1>
+  
+
+        
+        <a href="/2020/10/06/实验2:系统调用/" class="archive-article-date">
+  	<time datetime="2020-10-06T07:23:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="实验2-系统调用"><a href="#实验2-系统调用" class="headerlink" title="实验2: 系统调用"></a>实验2: 系统调用</h1><h2 id="实验内容"><a href="#实验内容" class="headerlink" title="实验内容"></a>实验内容</h2><p>在 Linux 0.11 上添加两个系统调用，并编写两个简单的应用程序测试它们。</p>
+<h3 id="1-iam"><a href="#1-iam" class="headerlink" title="1. iam()"></a>1. <code>iam()</code></h3><p>第一个系统调用是 iam()，其原型为：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">iam</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> * name)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>完成的功能是将字符串参数 <code>name</code> 的内容拷贝到内核中保存下来。要求 <code>name</code> 的长度不能超过 23 个字符。返回值是拷贝的字符数。如果 <code>name</code> 的字符个数超过了 <code>23</code>，则返回 “-1”，并置 errno 为 EINVAL。</p>
+<p>在 <code>kernal/who.c</code> 中实现此系统调用。</p>
+<h3 id="2-whoami"><a href="#2-whoami" class="headerlink" title="2. whoami()"></a>2. <code>whoami()</code></h3><p>第二个系统调用是 whoami()，其原型为：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">whoami</span><span class="params">(<span class="keyword">char</span>* name, <span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="built_in">size</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>它将内核中由 <code>iam()</code> 保存的名字拷贝到 name 指向的用户地址空间中，同时确保不会对 <code>name</code> 越界访存（<code>name</code> 的大小由 <code>size</code> 说明）。返回值是拷贝的字符数。如果 <code>size</code> 小于需要的空间，则返回“-1”，并置 errno 为 EINVAL。</p>
+<p>也是在 <code>kernal/who.c</code> 中实现。</p>
+<h3 id="3-测试程序"><a href="#3-测试程序" class="headerlink" title="3. 测试程序"></a>3. 测试程序</h3><p>运行添加过新系统调用的 Linux 0.11，在其环境下编写两个测试程序 iam.c 和 whoami.c。最终的运行结果是：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ./iam lizhijun</span><br><span class="line">$ ./whoami</span><br><span class="line">lizhijun</span><br></pre></td></tr></table></figure>
+
+<h2 id="系统调用简介"><a href="#系统调用简介" class="headerlink" title="系统调用简介"></a>系统调用简介</h2><p>系统调用和一般的函数调用在使用方式上没有区别，区别在于调用之后函数内部如何处理。</p>
+<!-- more -- >
+系统调用中使用`int 0x80`来切换到内核态，使用内核中的系统函数来完成系统调用，如下面的步骤：
+
+1. 应用程序调用库函数（API）；
+2. API 将系统调用号存入 EAX，然后通过中断调用使系统进入内核态；
+3. 内核中的中断处理函数根据系统调用号，调用对应的内核函数（系统调用）；
+4. 系统调用完成相应功能，将返回值存入 EAX，返回到中断处理函数；
+5. 中断处理函数返回到 API 中；
+6. API 将 EAX 返回给应用程序。
+
+下图是一个系统调用在内核里面的调用流程：
+
+<center class="third">
+    <img src="https://gitee.com/Hao-132/figure/raw/master/img/系统调用.png" width="600"/>
+</center>
+
+
+
+需要修改的文件(以linux-0.11为主文件夹)：
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">linux-0.11/include/linux/sys.h</span><br><span class="line">linux-0.11/kernel/system_call.s</span><br><span class="line">linux-0.11/kernel/Makefile</span><br><span class="line">在linux-0.11/kernel中添加文件</span><br><span class="line">who.c</span><br><span class="line"></span><br><span class="line">下面的需要在虚拟机中的linux系统中修改:</span><br><span class="line">在linux-0.11的文件目录下修改</span><br><span class="line">/usr/root/include/unistd.h</span><br><span class="line">~/iam.c</span><br><span class="line">~/whoami.c</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改sys-h"><a href="#修改sys-h" class="headerlink" title="修改sys.h"></a>修改<code>sys.h</code></h2><p>在<code>sys.h</code>中维护了一个<code>sys_call_table</code>是一个函数指针数组，通过系统调用号，然后在数组中找到相应的中断处理函数。我们要将自己编写的系统调用添加到里面，就如以下内容：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">int</span> <span class="title">sys_iam</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">int</span> <span class="title">sys_whoami</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">fn_ptr sys_call_table[] = &#123;......,sys_setregid,sys_iam,sys_whoami&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改unistd-h"><a href="#修改unistd-h" class="headerlink" title="修改unistd.h"></a>修改<code>unistd.h</code></h2><p>在<code>unistd.h</code>中定义了系统调用的编号，和一些宏，如下面所示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#define __NR_setregid	71</span><br><span class="line">//在这里添加我们自己的系统调用编号，使我们的系统调用可以在sys.h中找到</span><br><span class="line">#define __NR_iam		72</span><br><span class="line">#define __NR_whoami		73</span><br><span class="line"></span><br><span class="line">//这里定义了一个没有参数输入的系统调用宏。</span><br><span class="line">#define _syscall0(type,name) \</span><br><span class="line">type name(void) \</span><br><span class="line">&#123; \</span><br><span class="line">long __res; \</span><br><span class="line">__asm__ volatile (&quot;int $0x80&quot; \</span><br><span class="line">	: &quot;=a&quot; (__res) \</span><br><span class="line">	: &quot;0&quot; (__NR_##name)); \  //这里就是把系统调用编号，存入EAX中。</span><br><span class="line">if (__res &gt;= 0) \</span><br><span class="line">	return (type) __res; \</span><br><span class="line">errno = -__res; \</span><br><span class="line">return -1; \</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改system-call-s"><a href="#修改system-call-s" class="headerlink" title="修改system_call.s"></a>修改<code>system_call.s</code></h2><p>将其中第61行的<code>nr_system_calls = 72</code>里面的72改成74，因为这里的<code>nr_system_calls</code>指的是总共有多少个系统调用。</p>
+<h2 id="修改Makefile"><a href="#修改Makefile" class="headerlink" title="修改Makefile"></a>修改<code>Makefile</code></h2><p>修改内容如下，在<code>OBJS</code>最后添加<code>who.o</code>，让内核中包含<code>who.c</code>里面的内容。</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">OBJS  = sched.o system_call.o traps.o asm.o fork.o \</span><br><span class="line">	panic.o printk.o vsprintf.o sys.o exit.o \</span><br><span class="line">	signal.o mktime.o who.o</span><br></pre></td></tr></table></figure>
+
+<p>然后在末尾添加如下内容，对<code>who.c</code>编译，链接。</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">who.s who.o: who.c  ../<span class="keyword">include</span>/linux/kernel.h ../<span class="keyword">include</span>/unistd.h <span class="comment">#! add who.c</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="编写who-c"><a href="#编写who-c" class="headerlink" title="编写who.c"></a>编写<code>who.c</code></h2><p>在<code>who.c</code>中要实现<code>iam()</code>和<code>whami()</code>这两个函数，这里参考了[<a href="https://ehye.github.io/2020/04/01/hit-oslab2/][https://ehye.github.io/2020/04/01/hit-oslab2/]">https://ehye.github.io/2020/04/01/hit-oslab2/][https://ehye.github.io/2020/04/01/hit-oslab2/]</a></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;asm/segment.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> myname[<span class="number">24</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sys_iam</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *name)</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> str[<span class="number">25</span>];</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">do</span>&#123; <span class="comment">// get char from user input</span></span><br><span class="line">        str[i] = get_fs_byte(name + i);</span><br><span class="line">    &#125; <span class="keyword">while</span> (i &lt;= <span class="number">25</span> &amp;&amp; str[i++] != <span class="string">'\0'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (i &gt; <span class="number">24</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> -(EINVAL);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">strcpy</span>(myname, str);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> i<span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sys_whoami</span><span class="params">(<span class="keyword">char</span> *name, <span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="built_in">size</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> length = <span class="built_in">strlen</span>(myname);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">size</span> &lt; length)&#123;</span><br><span class="line">        <span class="keyword">return</span> -(EINVAL);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; length; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// copy from kernel mode to user mode</span></span><br><span class="line">        put_fs_byte(myname[i], name + i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> length;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>上面的代码要注意的是，这里代码是位于内核态的。我们定义的数据都是在内核态中定义的。无法直接获取用户态的内容，所以这里用了两个函数<code>get_fs_byte</code>和<code>put_fs_byte</code>，第一个用来得到用户态的数据，第二个用来将数据存入用户态</strong>。</p>
+<h2 id="编写iam-和whoami"><a href="#编写iam-和whoami" class="headerlink" title="编写iam()和whoami()"></a>编写<code>iam()</code>和<code>whoami()</code></h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __LIBRARY__</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//iam()在用户空间的接口函数</span></span><br><span class="line"><span class="comment">// 这是定义在unistd.h里面的一个宏，展开后是一个包含int 0x80中断的代码。</span></span><br><span class="line">_syscall1(<span class="keyword">int</span>, iam, <span class="keyword">const</span> <span class="keyword">char</span>*, name);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span>&#123;</span><br><span class="line">    iam(argv[<span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __LIBRARY__</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// whoami()在用户空间的接口函数</span></span><br><span class="line"><span class="comment">// 这是定义在unistd.h里面的一个宏，展开后是一个包含int 0x80中断的代码。</span></span><br><span class="line">_syscall2(<span class="keyword">int</span>, whoami,<span class="keyword">char</span>*,name,<span class="keyword">unsigned</span> <span class="keyword">int</span>,<span class="built_in">size</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">char</span> *arg)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">30</span>];</span><br><span class="line">    whoami(name, <span class="number">30</span>);</span><br><span class="line">  	<span class="built_in">printf</span>(<span class="string">"%s\n"</span>, name);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这里要注意的是，<strong><code>#define __LIBRARY__</code>一定要在<code>#include &lt;unistd.h&gt;</code>前面，要不然就会报错</strong>，具体是什么原因，我现在还不清楚。</p>
+<h2 id="调试运行"><a href="#调试运行" class="headerlink" title="调试运行"></a>调试运行</h2><p>完成上述的修改，并且重新编译运行linux-0.11后，在linux-0.11里面输入下面的命令，验证结果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -o iam iam.c</span><br><span class="line">$ gcc -o whoami whoami.c</span><br><span class="line">$ ./iam hello,world</span><br><span class="line">$ ./whoami</span><br><span class="line">hello,world</span><br></pre></td></tr></table></figure>
+
+<h2 id="提交验证"><a href="#提交验证" class="headerlink" title="提交验证"></a>提交验证</h2><p>使用老师提供的<code>testlab2.c</code>和<code>testlab2.sh</code>来验证我们的代码，过程如下，需要在linux-0.11里面运行。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -o iam iam.c</span><br><span class="line">$ gcc -o whoami whoami.c</span><br><span class="line">$ gcc testlab2.c</span><br><span class="line">$ ./a.out</span><br><span class="line"></span><br><span class="line">$ ./testlab2.sh</span><br></pre></td></tr></table></figure>
+
+<p>运行<code>a.out</code>和<code>testlab2.sh</code>后的结果如下：</p>
+<center class="third">
+    <img src="https://gitee.com/Hao-132/figure/raw/master/img/testlab2.c.jpg" width="600"/>
+</center>
+
+<center class="third">
+    <img src="https://gitee.com/Hao-132/figure/raw/master/img/testlab2.sh.jpg" width="600"/>
+</center>
+-->
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">操作系统</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-华为云ubuntu配置nginx踩坑记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -822,82 +964,6 @@
 
 
   
-    <article id="post-7-3-Pop-Sequence-25分" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/11/7-3-Pop-Sequence-25分/">7-3 Pop Sequence (25分)</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/11/7-3-Pop-Sequence-25分/" class="archive-article-date">
-  	<time datetime="2019-10-11T08:28:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> <strong>1、</strong>刚开始受严蔚敏数据结构的启发，想用比较大小的方法来判断是不是出栈序列。但是发现最后一个测试点就是卡这个算法。<br> <strong>2、</strong>然后看了柳神的博客，自己根据理解重新写了算法，但是第二个测试点还是过不去，下面是我的想法。<br> 步骤：循环判断数组中的每一个数，初始化temp=1 ，用temp来判断当前数组的最大值。如果数组当前值<strong>小于temp</strong>，就出栈，若<strong>大于等于temp就入栈</strong>，直到temp等于最大值。如果超过栈的容量标记flag=0并且break。最后根据flag判断YES或NO。<br> <strong>3、</strong>但是上面的步骤不能通过第二个测试点。<br>于是参考了柳神的程序，得到了下面的程序：</p>
-        
-          <a class="article-more-a" href="/2019/10/11/7-3-Pop-Sequence-25分/#more">展开全文 >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">队列</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1026,15 +1092,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">队列</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PTA</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">队列</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">bugs</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1046,23 +1120,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vim</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">踩坑</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">bugs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数学建模</a>
+                <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数学建模</a>
               </li>
             
             <div class="clearfix"></div>
