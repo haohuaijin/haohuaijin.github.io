@@ -16,10 +16,14 @@
 <meta property="og:site_name" content="HHJ的个人网站">
 <meta property="og:description" content="实验2: 系统调用实验内容在 Linux 0.11 上添加两个系统调用，并编写两个简单的应用程序测试它们。 1. iam()第一个系统调用是 iam()，其原型为： 1int iam(const char * name);  完成的功能是将字符串参数 name 的内容拷贝到内核中保存下来。要求 name 的长度不能超过 23 个字符。返回值是拷贝的字符数。如果 name 的字符个数超过了 23，则">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-06T07:31:22.126Z">
+<meta property="og:image" content="https://gitee.com/Hao-132/figure/raw/master/img/系统调用.png">
+<meta property="og:image" content="https://gitee.com/Hao-132/figure/raw/master/img/testlab2.c.jpg">
+<meta property="og:image" content="https://gitee.com/Hao-132/figure/raw/master/img/testlab2.sh.jpg">
+<meta property="og:updated_time" content="2020-10-06T07:33:17.841Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="实验2:系统调用">
 <meta name="twitter:description" content="实验2: 系统调用实验内容在 Linux 0.11 上添加两个系统调用，并编写两个简单的应用程序测试它们。 1. iam()第一个系统调用是 iam()，其原型为： 1int iam(const char * name);  完成的功能是将字符串参数 name 的内容拷贝到内核中保存下来。要求 name 的长度不能超过 23 个字符。返回值是拷贝的字符数。如果 name 的字符个数超过了 23，则">
+<meta name="twitter:image" content="https://gitee.com/Hao-132/figure/raw/master/img/系统调用.png">
   
     <link rel="alternative" href="/atom.xml" title="HHJ的个人网站" type="application/atom+xml">
   
@@ -177,26 +181,25 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ./iam lizhijun</span><br><span class="line">$ ./whoami</span><br><span class="line">lizhijun</span><br></pre></td></tr></table></figure>
 
 <h2 id="系统调用简介"><a href="#系统调用简介" class="headerlink" title="系统调用简介"></a>系统调用简介</h2><p>系统调用和一般的函数调用在使用方式上没有区别，区别在于调用之后函数内部如何处理。</p>
-<!-- more -- >
-系统调用中使用`int 0x80`来切换到内核态，使用内核中的系统函数来完成系统调用，如下面的步骤：
+<a id="more"></a>
 
-1. 应用程序调用库函数（API）；
-2. API 将系统调用号存入 EAX，然后通过中断调用使系统进入内核态；
-3. 内核中的中断处理函数根据系统调用号，调用对应的内核函数（系统调用）；
-4. 系统调用完成相应功能，将返回值存入 EAX，返回到中断处理函数；
-5. 中断处理函数返回到 API 中；
-6. API 将 EAX 返回给应用程序。
-
-下图是一个系统调用在内核里面的调用流程：
-
+<p>系统调用中使用<code>int 0x80</code>来切换到内核态，使用内核中的系统函数来完成系统调用，如下面的步骤：</p>
+<ol>
+<li>应用程序调用库函数（API）；</li>
+<li>API 将系统调用号存入 EAX，然后通过中断调用使系统进入内核态；</li>
+<li>内核中的中断处理函数根据系统调用号，调用对应的内核函数（系统调用）；</li>
+<li>系统调用完成相应功能，将返回值存入 EAX，返回到中断处理函数；</li>
+<li>中断处理函数返回到 API 中；</li>
+<li>API 将 EAX 返回给应用程序。</li>
+</ol>
+<p>下图是一个系统调用在内核里面的调用流程：</p>
 <center class="third">
-    <img src="https://gitee.com/Hao-132/figure/raw/master/img/系统调用.png" width="600"/>
+    <img src="https://gitee.com/Hao-132/figure/raw/master/img/系统调用.png" width="600">
 </center>
 
 
 
-需要修改的文件(以linux-0.11为主文件夹)：
-
+<p>需要修改的文件(以linux-0.11为主文件夹)：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">linux-0.11/include/linux/sys.h</span><br><span class="line">linux-0.11/kernel/system_call.s</span><br><span class="line">linux-0.11/kernel/Makefile</span><br><span class="line">在linux-0.11/kernel中添加文件</span><br><span class="line">who.c</span><br><span class="line"></span><br><span class="line">下面的需要在虚拟机中的linux系统中修改:</span><br><span class="line">在linux-0.11的文件目录下修改</span><br><span class="line">/usr/root/include/unistd.h</span><br><span class="line">~/iam.c</span><br><span class="line">~/whoami.c</span><br></pre></td></tr></table></figure>
 
 <h2 id="修改sys-h"><a href="#修改sys-h" class="headerlink" title="修改sys.h"></a>修改<code>sys.h</code></h2><p>在<code>sys.h</code>中维护了一个<code>sys_call_table</code>是一个函数指针数组，通过系统调用号，然后在数组中找到相应的中断处理函数。我们要将自己编写的系统调用添加到里面，就如以下内容：</p>
@@ -212,7 +215,7 @@
 <p>然后在末尾添加如下内容，对<code>who.c</code>编译，链接。</p>
 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">who.s who.o: who.c  ../<span class="keyword">include</span>/linux/kernel.h ../<span class="keyword">include</span>/unistd.h <span class="comment">#! add who.c</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="编写who-c"><a href="#编写who-c" class="headerlink" title="编写who.c"></a>编写<code>who.c</code></h2><p>在<code>who.c</code>中要实现<code>iam()</code>和<code>whami()</code>这两个函数，这里参考了[<a href="https://ehye.github.io/2020/04/01/hit-oslab2/][https://ehye.github.io/2020/04/01/hit-oslab2/]">https://ehye.github.io/2020/04/01/hit-oslab2/][https://ehye.github.io/2020/04/01/hit-oslab2/]</a></p>
+<h2 id="编写who-c"><a href="#编写who-c" class="headerlink" title="编写who.c"></a>编写<code>who.c</code></h2><p>在<code>who.c</code>中要实现<code>iam()</code>和<code>whami()</code>这两个函数，这里参考了[<a href="https://ehye.github.io/2020/04/01/hit-oslab2/][https://ehye.github.io/2020/04/01/hit-oslab2/]" target="_blank" rel="noopener">https://ehye.github.io/2020/04/01/hit-oslab2/][https://ehye.github.io/2020/04/01/hit-oslab2/]</a></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;asm/segment.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> myname[<span class="number">24</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sys_iam</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *name)</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> str[<span class="number">25</span>];</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">do</span>&#123; <span class="comment">// get char from user input</span></span><br><span class="line">        str[i] = get_fs_byte(name + i);</span><br><span class="line">    &#125; <span class="keyword">while</span> (i &lt;= <span class="number">25</span> &amp;&amp; str[i++] != <span class="string">'\0'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (i &gt; <span class="number">24</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> -(EINVAL);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">strcpy</span>(myname, str);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> i<span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sys_whoami</span><span class="params">(<span class="keyword">char</span> *name, <span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="built_in">size</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> length = <span class="built_in">strlen</span>(myname);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">size</span> &lt; length)&#123;</span><br><span class="line">        <span class="keyword">return</span> -(EINVAL);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; length; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// copy from kernel mode to user mode</span></span><br><span class="line">        put_fs_byte(myname[i], name + i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> length;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>上面的代码要注意的是，这里代码是位于内核态的。我们定义的数据都是在内核态中定义的。无法直接获取用户态的内容，所以这里用了两个函数<code>get_fs_byte</code>和<code>put_fs_byte</code>，第一个用来得到用户态的数据，第二个用来将数据存入用户态</strong>。</p>
@@ -229,13 +232,13 @@
 
 <p>运行<code>a.out</code>和<code>testlab2.sh</code>后的结果如下：</p>
 <center class="third">
-    <img src="https://gitee.com/Hao-132/figure/raw/master/img/testlab2.c.jpg" width="600"/>
+    <img src="https://gitee.com/Hao-132/figure/raw/master/img/testlab2.c.jpg" width="600">
 </center>
 
 <center class="third">
-    <img src="https://gitee.com/Hao-132/figure/raw/master/img/testlab2.sh.jpg" width="600"/>
+    <img src="https://gitee.com/Hao-132/figure/raw/master/img/testlab2.sh.jpg" width="600">
 </center>
--->
+
       
 
       
@@ -538,11 +541,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">PTA</a>
+                <a href="javascript:void(0)" class="js-tag color3">队列</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">队列</a>
+                <a href="javascript:void(0)" class="js-tag color4">PTA</a>
               </li>
              
               <li class="article-tag-list-item">
