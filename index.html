@@ -60,7 +60,7 @@
 			</ul>
 		</nav>
 		<nav>
-			总文章数 16
+			总文章数 17
 		</nav>
 		<nav class="header-smart-menu">
     		
@@ -138,6 +138,86 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-实验3:进程运行轨迹的跟踪与统计" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/17/实验3:进程运行轨迹的跟踪与统计/">实验3:进程运行轨迹的跟踪与统计</a>
+    </h1>
+  
+
+        
+        <a href="/2020/10/17/实验3:进程运行轨迹的跟踪与统计/" class="archive-article-date">
+  	<time datetime="2020-10-17T03:30:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>课程链接：<a href="https://www.lanqiao.cn/courses/115/learning/?id=570" target="_blank" rel="noopener">进程运行轨迹跟踪与统计</a></p>
+<h2 id="实验内容"><a href="#实验内容" class="headerlink" title="实验内容"></a>实验内容</h2><p>进程从创建（Linux 下调用 fork()）到结束的整个过程就是进程的生命期，进程在其生命期中的运行轨迹实际上就表现为进程状态的多次切换，如进程创建以后会成为就绪态；当该进程被调度以后会切换到运行态；在运行的过程中如果启动了一个文件读写操作，操作系统会将该进程切换到阻塞态（等待态）从而让出 CPU；当文件读写完毕以后，操作系统会在将其切换成就绪态，等待进程调度算法来调度该进程执行……</p>
+<p>本次实验包括如下内容：</p>
+<ul>
+<li>基于模板 <code>process.c</code> 编写多进程的样本程序，实现如下功能： + 所有子进程都并行运行，每个子进程的实际运行时间一般不超过 30 秒； + 父进程向标准输出打印所有q子进程的 id，并在所有子进程都退出后才退出；</li>
+<li>在 <code>Linux0.11</code> 上实现进程运行轨迹的跟踪。 + 基本任务是在内核中维护一个日志文件 <code>/var/process.log</code>，把从操作系统启动到系统关机过程中所有进程的运行轨迹都记录在这一 log 文件中。</li>
+<li>在修改过的 0.11 上运行样本程序，通过分析 log 文件，统计该程序建立的所有进程的等待时间、完成时间（周转时间）和运行时间，然后计算平均等待时间，平均完成时间和吞吐量。可以自己编写统计程序，也可以使用 python 脚本程序—— <code>stat_log.py</code>（在 <code>/home/teacher/</code> 目录下） ——进行统计。</li>
+<li>修改 0.11 进程调度的时间片，然后再运行同样的样本程序，统计同样的时间数据，和原有的情况对比，体会不同时间片带来的差异。</li>
+</ul>
+        
+          <a class="article-more-a" href="/2020/10/17/实验3:进程运行轨迹的跟踪与统计/#more">展开全文 >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">操作系统</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-实验1:操作系统的引导" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -834,86 +914,6 @@
 
 
   
-    <article id="post-7-6-列出连通集-25分" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/26/7-6-列出连通集-25分/">7-6 列出连通集 (25分)</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/26/7-6-列出连通集-25分/" class="archive-article-date">
-  	<time datetime="2019-10-26T12:04:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这道题主要考察了DFS，和BFS的基本操作。考察我们对图的构建，以及运用DFS和BFS对图进行遍历。<br>DFS是运用了递归的思想，<br>而BFS则可以通过队列来实现。<br>我在做题时遇到的困难，主要是在<strong>BFS的思路</strong>和<strong>队列</strong>的实现上。因为队列原来以为很熟，但现在一写很多细节都忘了。<br><strong>所以数据结构要经常写，要不然忘得很快。</strong><br>下面是代码，可能有点冗杂。</p>
-        
-          <a class="article-more-a" href="/2019/10/26/7-6-列出连通集-25分/#more">展开全文 >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DFS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">BFS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1042,23 +1042,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">PTA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">队列</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">PTA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vim</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">bugs</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1070,15 +1062,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">踩坑</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数学建模</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">踩坑</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">bugs</a>
               </li>
              
               <li class="article-tag-list-item">

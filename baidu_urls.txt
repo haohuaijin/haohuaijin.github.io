@@ -1,5 +1,5 @@
+https://haohuaijin.github.io/2020/10/17/实验3:进程运行轨迹的跟踪与统计/
 https://haohuaijin.github.io/2020/10/06/实验1:操作系统的引导/
 https://haohuaijin.github.io/2020/10/06/实验2:系统调用/
 https://haohuaijin.github.io/2020/09/06/华为云ubuntu配置nginx踩坑记录/
 https://haohuaijin.github.io/2020/08/08/macos-vim-进入可视块模式/
-https://haohuaijin.github.io/2020/08/01/matlab-for-mac-打开cftool卡死解决方案/
