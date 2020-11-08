@@ -60,7 +60,7 @@
 			</ul>
 		</nav>
 		<nav>
-			总文章数 18
+			总文章数 19
 		</nav>
 		<nav class="header-smart-menu">
     		
@@ -138,6 +138,92 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-实验5-信号量的实现与应用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/08/实验5-信号量的实现与应用/">实验5:信号量的实现与应用</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/08/实验5-信号量的实现与应用/" class="archive-article-date">
+  	<time datetime="2020-11-08T07:42:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>实验链接：<a href="https://www.lanqiao.cn/courses/115" target="_blank" rel="noopener">信号量的应用与实现</a></p>
+<h2 id="实验内容"><a href="#实验内容" class="headerlink" title="实验内容"></a>实验内容</h2><p>本次实验的基本内容是：</p>
+<ul>
+<li>在 Ubuntu 下编写程序，用信号量解决生产者——消费者问题；</li>
+<li>在 0.11 中实现信号量，用生产者—消费者程序检验之。</li>
+</ul>
+<h3 id="1-用信号量解决生产者—消费者问题"><a href="#1-用信号量解决生产者—消费者问题" class="headerlink" title="1. 用信号量解决生产者—消费者问题"></a>1. 用信号量解决生产者—消费者问题</h3><p>在 Ubuntu 上编写应用程序“pc.c”，解决经典的生产者—消费者问题，完成下面的功能：</p>
+<ul>
+<li>建立一个生产者进程，N 个消费者进程（N&gt;1）；</li>
+<li>用文件建立一个共享缓冲区；</li>
+<li>生产者进程依次向缓冲区写入整数 0,1,2,…,M，M&gt;=500；</li>
+<li>消费者进程从缓冲区读数，每次读一个，并将读出的数字从缓冲区删除，然后将本进程 ID 和 + 数字输出到标准输出；</li>
+<li>缓冲区同时最多只能保存 10 个数。</li>
+</ul>
+<p>一种可能的输出效果是：</p>
+        
+          <a class="article-more-a" href="/2020/11/08/实验5-信号量的实现与应用/#more">展开全文 >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">操作系统</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-实验4-基于内核栈的进程切换" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -838,79 +924,6 @@
 
 
   
-    <article id="post-7-11 Saving James Bond - Hard Version (30 分)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/05/7-11 Saving James Bond - Hard Version (30 分)/">7-11 Saving James Bond - Hard Version (30 分)</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/05/7-11 Saving James Bond - Hard Version (30 分)/" class="archive-article-date">
-  	<time datetime="2019-11-05T09:40:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原题链接：<a href="https://pintia.cn/problem-sets/16/problems/673" target="_blank" rel="noopener">https://pintia.cn/problem-sets/16/problems/673</a><br>这道题本质是就是一道BFS，只不过要加上路径。<br>&emsp;开始做的时候比较顺利，但是总是有一个测试点没过去，找了半天还是找不到错误。于是google一下，发现是没仔细看题。<br>&emsp;题目中说，当有<strong>多条最短路径时，选择第一跳最短的</strong>。我竟然么看见(😭😭找了两个多小时)。处理第一条最短，比较简单的做法时我们在用BFS，一开始把鳄鱼入队时，就把顺序排好，这样出来的一定是最终的结果。</p>
-<h6 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h6><p>在处理能不能在两个鳄鱼之间跳时，一是可以先计算好能不能跳，然后直接在BFS里用结果。二是在BFS的过程中，判断能不能跳。<br>其实我个人比较推荐第二种，没必要先计算好，现算现用就行。不过如果计算的结构要多次使用的话，保存下来了比较好。</p>
-        
-          <a class="article-more-a" href="/2019/11/05/7-11 Saving James Bond - Hard Version (30 分)/#more">展开全文 >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">BFS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1031,11 +1044,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">BFS</a>
+                <a href="javascript:void(0)" class="js-tag color3">链表</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">PTA</a>
+                <a href="javascript:void(0)" class="js-tag color4">BFS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1043,19 +1056,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">链表</a>
+                <a href="javascript:void(0)" class="js-tag color4">PTA</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vim</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">bugs</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1067,6 +1072,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">bugs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">踩坑</a>
               </li>
              
@@ -1075,11 +1088,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+                <a href="javascript:void(0)" class="js-tag color5">数学建模</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数学建模</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
             
             <div class="clearfix"></div>
