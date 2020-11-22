@@ -1,5 +1,5 @@
+https://haohuaijin.github.io/2020/11/22/CSAPP-Bomb-lab/
 https://haohuaijin.github.io/2020/11/08/实验5-信号量的实现与应用/
 https://haohuaijin.github.io/2020/10/26/实验4-基于内核栈的进程切换/
 https://haohuaijin.github.io/2020/10/17/实验3:进程运行轨迹的跟踪与统计/
 https://haohuaijin.github.io/2020/10/06/实验1:操作系统的引导/
-https://haohuaijin.github.io/2020/10/06/实验2:系统调用/

@@ -60,7 +60,7 @@
 			</ul>
 		</nav>
 		<nav>
-			总文章数 19
+			总文章数 20
 		</nav>
 		<nav class="header-smart-menu">
     		
@@ -138,6 +138,90 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-计算机网络之运输层" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/07/计算机网络之运输层/">计算机网络之运输层</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/07/计算机网络之运输层/" class="archive-article-date">
+  	<time datetime="2020-07-07T03:23:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这里主要讲的是在运输层几个比较重要的技术，即多路分解和复用，可靠数据传输原理和拥塞原理。</p>
+<h2 id="1-多路复用-分解"><a href="#1-多路复用-分解" class="headerlink" title="1. 多路复用/分解"></a>1. 多路复用/分解</h2><p>先给出官方定义，将主机间交付扩展到进程间交付被称为<strong>运输层的多路复用和分解</strong>。<strong>多路分解</strong>就是在运输层接收到来自网络层数据后，根据运输层报文特殊字段的信息，将运输层报文段的数据交付到正确的套接字中。<strong>多路复用</strong>就是在运输层接受到<strong>套接字</strong>数据后，根据套接字的不同，生成<strong>运输层报文特殊字段</strong>(用于分解)，然后将报文发送到网络层。通俗来说，多路复用和分解可以让<strong>不同进程的报文</strong>来使用<strong>相同的运输层协议</strong>(TCP，UDP)运输报文。</p>
+<center class="third">
+    <img src="https://gitee.com/Hao-132/blogimage/raw/master/img/多路复用分解.png" width="600">
+</center>
+
+<p>如图，运输层通过多路复用和分解，实现数据的正确交付。</p>
+<p>下面这句话引用自计算机网络自顶向下方法，可以加深我们的理解：</p>
+<blockquote>
+<p>尽管我们在因特网运输层协议的环境下引入了多路复用和多路分解，认识到下列事实是重要的：</p>
+<p>他们与在某层(在运输层或别处)的单一协议何时被位于接下来的较高层的多个协议使用有关。</p>
+</blockquote>
+<h5 id="那么如何实现多路复用和分解呢？"><a href="#那么如何实现多路复用和分解呢？" class="headerlink" title="那么如何实现多路复用和分解呢？"></a>那么如何实现多路复用和分解呢？</h5>
+        
+          <a class="article-more-a" href="/2020/07/07/计算机网络之运输层/#more">展开全文 >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机网络</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-7-11 Saving James Bond - Hard Version (30 分)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -325,15 +409,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">BFS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DFS</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">BFS</a>
         		</li>
       		
 		</ul>
@@ -958,6 +1042,10 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">BFS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DFS</a>
               </li>
              
@@ -970,7 +1058,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">BFS</a>
+                <a href="javascript:void(0)" class="js-tag color4">PTA</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -978,11 +1066,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">PTA</a>
+                <a href="javascript:void(0)" class="js-tag color2">树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树</a>
+                <a href="javascript:void(0)" class="js-tag color1">csapp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -994,7 +1082,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">bugs</a>
+                <a href="javascript:void(0)" class="js-tag color3">踩坑</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1002,19 +1090,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">踩坑</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数学建模</a>
+                <a href="javascript:void(0)" class="js-tag color5">bugs</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数学建模</a>
               </li>
             
             <div class="clearfix"></div>
