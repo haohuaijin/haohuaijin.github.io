@@ -60,7 +60,7 @@
 			</ul>
 		</nav>
 		<nav>
-			总文章数 20
+			总文章数 21
 		</nav>
 		<nav class="header-smart-menu">
     		
@@ -138,6 +138,80 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-遗传算法学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/30/遗传算法学习笔记/">遗传算法学习笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/30/遗传算法学习笔记/" class="archive-article-date">
+  	<time datetime="2020-07-30T01:45:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>遗传算法是一种启发式的优化算法，具有很大的灵活性。之所以较遗传算法，这要是因为算法的过程模拟了自然选择。遗传算法的应用领域非常的广，适用于复杂的问题，同时还具有很大的灵活性，可以自主设计很多算子。</p>
+<p>下面介绍遗传算法的主要流程：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">初始化种群</span><br><span class="line">计算种群的适应度和累积概率</span><br><span class="line">while iter &lt; itermax:</span><br><span class="line">	复制 //剔除适应度低的，将适应度好的复制一份</span><br><span class="line">	交叉 //二进制数字位数交换</span><br><span class="line">	变异 //二进制位数取否</span><br><span class="line">	重新计算适应度和累积概率</span><br><span class="line">	end</span><br><span class="line">解码输出结果</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2020/07/30/遗传算法学习笔记/#more">展开全文 >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数学建模</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-计算机网络之运输层" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -409,15 +483,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">BFS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DFS</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">BFS</a>
         		</li>
       		
 		</ul>
@@ -852,87 +926,9 @@
 
 
   
-    <article id="post-7-4 List Leaves (25 分)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/03/7-4 List Leaves (25 分)/">7-4 List Leaves(25分)</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/03/7-4 List Leaves (25 分)/" class="archive-article-date">
-  	<time datetime="2019-10-03T08:58:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这道题在逻辑上并不难，难在我们可能树不是很熟悉上。<br>我用了<strong>静态链表</strong>的方法构造树，用<strong>循环队列</strong>来用数组实现队列。</p>
-<p><strong>思路：</strong><br>1、将数据读进来用，找到<strong>根节点</strong>。<br>2、<strong>递归</strong>找到所有的<strong>叶子节点</strong>。<br>3、用<strong>队列实现层次遍历</strong>，来找到树各层的元素。<br>4、比较<strong>叶子节点</strong>和<strong>层次遍历的结果</strong>得到最终的结果。</p>
-<h5 id="AC代码"><a href="#AC代码" class="headerlink" title="AC代码:"></a>AC代码:</h5>
-        
-          <a class="article-more-a" href="/2019/10/03/7-4 List Leaves (25 分)/#more">展开全文 >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PTA</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 
@@ -1042,15 +1038,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">BFS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DFS</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">BFS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1062,15 +1058,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">队列</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">csapp</a>
+                <a href="javascript:void(0)" class="js-tag color3">队列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1082,7 +1074,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">踩坑</a>
+                <a href="javascript:void(0)" class="js-tag color5">bugs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">csapp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1090,11 +1086,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
+                <a href="javascript:void(0)" class="js-tag color3">踩坑</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">bugs</a>
+                <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
               </li>
              
               <li class="article-tag-list-item">
